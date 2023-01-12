@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class Astroid : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float speed = 20;
+    public float rotationRate = 20;
+    public GameObject explosion;
+
+    Vector3 direction;
+    Vector3 rotation;
+
+    private void OnDestroy()
     {
-        
+        Instantiate(explosion, transform.position, transform.rotation);
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        direction = Quaternion.AngleAxis(Random.Range(0, 360), Vector3.up) * Vector3.forward;
+        rotation = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1));
+    }
+
     void Update()
     {
-        
+        transform.position += direction * speed * Time.deltaTime;
+        transform.rotation = transform.rotation * Quaternion.Euler(rotation * rotationRate * Time.deltaTime);
     }
 }
