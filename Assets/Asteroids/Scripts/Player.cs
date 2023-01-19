@@ -45,4 +45,12 @@ public class Player : MonoBehaviour
             GameObject go = Instantiate(prefab, bulletSpawnLocation.position, bulletSpawnLocation.rotation);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            FindObjectOfType<SpaceGameManager>()?.SetGameOver();
+        }
+    }
 }
