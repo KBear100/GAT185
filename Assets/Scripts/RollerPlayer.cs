@@ -44,7 +44,7 @@ public class RollerPlayer : MonoBehaviour
 
         if (onGround && Input.GetButtonDown("Jump"))
         {
-            rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * 7, ForceMode.Impulse);
         }
     }
 
@@ -71,7 +71,13 @@ public class RollerPlayer : MonoBehaviour
 
     public void OnDeath()
     {
-        RollerGameManager.Instance.SetGameOver();
+        RollerGameManager.Instance.SetPlayerDead();
+        Destroy(gameObject);
+    }
+
+    public void OnWin()
+    {
+        RollerGameManager.Instance.SetGameWin();
         Destroy(gameObject);
     }
 }
