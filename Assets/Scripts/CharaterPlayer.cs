@@ -7,13 +7,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class CharaterPlayer : MonoBehaviour
 {
-    [SerializeField] private float speed = 5;
-    [SerializeField] private float hitForce = 2;
-    [SerializeField] private float gravity = Physics.gravity.y;
-    [SerializeField] private float turnRate = 10;
-    [SerializeField] private float jumpHeight = 2;
     [SerializeField] private Animator animator;
     [SerializeField] private InputRouter inputRouter;
+    [SerializeField] private PlayerData playerData;
 
     CharacterController characterController;
     Vector2 inputAxis;
@@ -44,14 +40,14 @@ public class CharaterPlayer : MonoBehaviour
 
         if(characterController.isGrounded)
         {
-            velocity.x = direction.x * speed;
-            velocity.z = direction.z * speed;
+            velocity.x = direction.x * playerData.speed;
+            velocity.z = direction.z * playerData.speed;
             inAirTime = 0;
         }
         else
         {
             inAirTime += Time.deltaTime;
-            velocity.y += gravity * Time.deltaTime;
+            velocity.y += playerData.gravity * Time.deltaTime;
         }
 
         characterController.Move(velocity * Time.deltaTime);
@@ -59,7 +55,7 @@ public class CharaterPlayer : MonoBehaviour
         look.y = 0;
         if(look.magnitude > 0)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(look), turnRate * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(look), playerData.turnRate * Time.deltaTime);
         }
 
         //set animator parameters
@@ -93,7 +89,7 @@ public class CharaterPlayer : MonoBehaviour
         // then you can also multiply the push velocity by that.
 
         // Apply the push
-        body.velocity = pushDir * hitForce;
+        body.velocity = pushDir * playerData.hitForce;
     }
 
     public void OnJump()
@@ -101,7 +97,7 @@ public class CharaterPlayer : MonoBehaviour
         if(characterController.isGrounded)
         {
             animator.SetTrigger("Jump");
-            velocity.y = Mathf.Sqrt(jumpHeight * -3 * gravity);
+            velocity.y = Mathf.Sqrt(playerData.jumpHeight * -3 * playerData.gravity);
         }
     }
 
