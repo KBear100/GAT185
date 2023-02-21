@@ -6,6 +6,8 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyPlayer : MonoBehaviour
 {
+    [SerializeField] Animator animator;
+
     private Camera mainCamera;
     private NavMeshAgent navMeshAgent;
     private Transform target;
@@ -20,6 +22,7 @@ public class EnemyPlayer : MonoBehaviour
     void Update()
     {
         navMeshAgent.SetDestination(target.position);
+        animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
 
         //if(Input.GetMouseButtonDown(0))
         //{
