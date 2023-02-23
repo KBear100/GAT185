@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ammo : MonoBehaviour
+public abstract class Ammo : MonoBehaviour
 {
 	[SerializeField] protected AmmoData ammoData;
 
@@ -17,7 +17,7 @@ public class Ammo : MonoBehaviour
 		// create impact prefab
 		if (ammoData.impactPrefab != null)
 		{
-			Instantiate(ammoData.impactPrefab, target.transform.position, target.transform.rotation);
+			Instantiate(ammoData.impactPrefab, transform.position, transform.rotation);
 		}
 
 		// destroy game object
