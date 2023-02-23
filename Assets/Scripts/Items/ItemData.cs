@@ -31,11 +31,13 @@ public class ItemData : ScriptableObject
 	public string description;
 	public Sprite icon;
 	public bool allowMultiple;
+	public bool equipable;
 
 	public ItemType itemType;
 	public UsageType usageType;
 	
 	public string animTriggerName;
+	public string animEquipName;
 	
 	public GameObject itemPrefab;
 	public GameObject pickupPrefab;

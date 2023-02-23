@@ -12,11 +12,24 @@ public class EnemyPlayer : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Transform target;
 
+    void OnDeath()
+    {
+        StartCoroutine(Death());
+    }
+
+    IEnumerator Death()
+    {
+        animator.SetTrigger("Death");
+        yield return new WaitForSeconds(4.0f);
+        Destroy(gameObject);
+    }
+
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player")?.transform;
         mainCamera = Camera.main;
         navMeshAgent = GetComponent<NavMeshAgent>();
+        GetComponent<Health>().onDeath += OnDeath;
     }
 
     void Update()

@@ -11,6 +11,7 @@ public class InputRouter : ScriptableObject, PlayerInputActions.IPlayerActions
 	public UnityAction fireStopEvent;
 	public UnityAction jumpEvent;
 	public UnityAction jumpStopEvent;
+	public UnityAction nextItemEvent;
 	public UnityAction<Vector2> moveEvent;
 
 	private PlayerInputActions inputActions;
@@ -42,7 +43,9 @@ public class InputRouter : ScriptableObject, PlayerInputActions.IPlayerActions
 
 	public void OnFire(InputAction.CallbackContext context)
 	{
-		switch (context.phase)
+
+        Debug.Log("Fire");
+        switch (context.phase)
 		{
 			case InputActionPhase.Performed:
 				fireEvent?.Invoke();
@@ -55,6 +58,7 @@ public class InputRouter : ScriptableObject, PlayerInputActions.IPlayerActions
 
 	public void OnJump(InputAction.CallbackContext context)
 	{
+		Debug.Log("jump");
 		switch (context.phase)
 		{
 			case InputActionPhase.Performed:
@@ -63,6 +67,15 @@ public class InputRouter : ScriptableObject, PlayerInputActions.IPlayerActions
 			case InputActionPhase.Canceled:
 				jumpStopEvent?.Invoke();
 				break;
+		}
+	}
+
+	public void OnNextItem(InputAction.CallbackContext context)
+	{
+		Debug.Log("item");
+		if(context.phase == InputActionPhase.Performed)
+		{
+			nextItemEvent?.Invoke();
 		}
 	}
 }

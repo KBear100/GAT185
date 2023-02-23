@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SwordAmmo
   m_EditorClassIdentifier: 
   ammoType: 1
-  lifetime: 0
-  damage: 20
+  lifetime: 0.1
+  damage: 100
   destroyOnImpact: 0
-  impactPrefab: {fileID: 100002, guid: e05640b713279be4ea35ced053857820, type: 3}
+  impactPrefab: {fileID: 3035055050641921446, guid: 9b285c399a085e64998b45e790d4b140, type: 3}
   force: 0
   forceMode: 0
   damageOverTime: 0

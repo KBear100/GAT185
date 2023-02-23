@@ -22,18 +22,19 @@ public class Weapon : Item
 	{
 		base.Equip();
 		weaponReady = true;
+		if(weaponData.animEquipName != "") animator.SetBool(weaponData.animEquipName, true);
 	}
 
 	public override void Unequip()
 	{
 		base.Unequip();
+		if(weaponData.animEquipName != "") animator.SetBool(weaponData.animEquipName, false);
 	}
 
 	public override void Use()
 	{
 		if (!weaponReady) return;
 
-		Debug.Log("Fire");
 		// trigger weapon animation if trigger name set and animator exists
 		// ammo will be created through animation event
 		if (weaponData.animTriggerName != "" && animator != null) 

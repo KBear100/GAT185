@@ -16,6 +16,7 @@ MonoBehaviour:
   description: 
   icon: {fileID: 0}
   allowMultiple: 0
+  equipable: 1
   itemType: 1
   usageType: 0
   animTriggerName: Attack

@@ -10,7 +10,7 @@ public class CharaterPlayer : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private InputRouter inputRouter;
     [SerializeField] private PlayerData playerData;
-    [SerializeField] private Weapon weapon;
+    [SerializeField] private Inventory inventory;
 
     CharacterController characterController;
     Vector2 inputAxis;
@@ -28,6 +28,7 @@ public class CharaterPlayer : MonoBehaviour
         inputRouter.moveEvent += OnMove;
         inputRouter.fireEvent += OnFire;
         inputRouter.fireStopEvent += OnFireStop;
+        inputRouter.nextItemEvent += OnNextItem;
     }
 
     void Update()
@@ -104,12 +105,17 @@ public class CharaterPlayer : MonoBehaviour
 
     public void OnFire()
     {
-        weapon.Use();
+        inventory.Use();
     }
 
     public void OnFireStop()
     {
-        weapon.StopUse();
+        inventory.StopUse();
+    }
+
+    public void OnNextItem()
+    {
+        inventory.EquipNextItem();
     }
 
 
@@ -120,7 +126,7 @@ public class CharaterPlayer : MonoBehaviour
 
     public void OnAnimEventItemUse()
     {
-        weapon.OnAnimEventItemUse();
+        inventory.OnAnimEventItemUse();
     }
 
     public void OnLeftFootSpawn(GameObject go)
