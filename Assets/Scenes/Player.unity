@@ -613,8 +613,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1266206511}
-  - component: {fileID: 1266206512}
   - component: {fileID: 1266206513}
+  - component: {fileID: 1266206514}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -637,25 +637,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1266206512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1266206510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7766aba6855ffcc42bf70e63db4e1568, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minTime: 2
-  maxTime: 4
-  radius: 100
-  spawnLocation: {fileID: 1174379729}
-  prefabs:
-  - {fileID: 645572048109618345, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
-  - {fileID: 645572048109618345, guid: e80ca97c4be8d954d9bc63f0feb49bb7, type: 3}
 --- !u!114 &1266206513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,6 +651,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreUI: {fileID: 1707207056}
   gameOverUI: {fileID: 338967984}
+--- !u!114 &1266206514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266206510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7766aba6855ffcc42bf70e63db4e1568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minTime: 2
+  maxTime: 3
+  radius: 100
+  spawnLocation: {fileID: 1174379729}
+  prefabs:
+  - {fileID: 645572048109618345, guid: 28548987d12c89f4bb36b9bef96ceebe, type: 3}
+  - {fileID: 645572048109618345, guid: e80ca97c4be8d954d9bc63f0feb49bb7, type: 3}
 --- !u!1 &1597448765
 GameObject:
   m_ObjectHideFlags: 0

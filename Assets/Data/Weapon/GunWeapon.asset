@@ -21,6 +21,8 @@ MonoBehaviour:
   usageType: 0
   animTriggerName: 
   animEquipName: WeaponEquip
+  rigLayerWeight:
+  - 1
   itemPrefab: {fileID: 0}
   pickupPrefab: {fileID: 0}
   fireRate: 0.2

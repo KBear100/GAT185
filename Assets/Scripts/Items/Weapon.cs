@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class Weapon : Item
 {
 	[SerializeField] WeaponData weaponData;
 	[SerializeField] Animator animator;
+	[SerializeField] RigBuilder rigBuilder;
 	[SerializeField] Transform ammoTransform;
 
 	private int ammoCount = 0;
@@ -23,7 +25,11 @@ public class Weapon : Item
 		base.Equip();
 		weaponReady = true;
 		if(weaponData.animEquipName != "") animator.SetBool(weaponData.animEquipName, true);
-	}
+        for (int i = 0; i < weaponData.rigLayerWeight.Length; i++)
+        {
+            rigBuilder.layers[i].rig.weight = weaponData.rigLayerWeight[i];
+        }
+    }
 
 	public override void Unequip()
 	{

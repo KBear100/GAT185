@@ -29,6 +29,8 @@ public class CharaterPlayer : MonoBehaviour
         inputRouter.fireEvent += OnFire;
         inputRouter.fireStopEvent += OnFireStop;
         inputRouter.nextItemEvent += OnNextItem;
+
+        GetComponent<Health>().onDeath += OnDeath;
     }
 
     void Update()
@@ -138,5 +140,10 @@ public class CharaterPlayer : MonoBehaviour
     {
         Transform bone = animator.GetBoneTransform(HumanBodyBones.RightFoot);
         Instantiate(go, bone.position, bone.rotation);
+    }
+
+    public void OnDeath()
+    {
+        Debug.Log("PlayerDead");
     }
 }

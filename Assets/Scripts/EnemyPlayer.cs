@@ -7,6 +7,9 @@ using UnityEngine.AI;
 public class EnemyPlayer : MonoBehaviour
 {
     [SerializeField] Animator animator;
+    [SerializeField] Sensor sensor;
+    [SerializeField] Transform attackTransform;
+    [SerializeField] float damage;
 
     private Camera mainCamera;
     private NavMeshAgent navMeshAgent;
@@ -29,11 +32,38 @@ public class EnemyPlayer : MonoBehaviour
         StartCoroutine(Death());
     }
 
+    IEnumerator Attack() 
+    { 
+        state = State.ATTACK; 
+        animator.SetTrigger("Attack"); 
+        yield return new WaitForSeconds(4.0f); 
+        state = State.CHASE; 
+    }
+
     IEnumerator Death()
     {
+        state = State.DEATH;
         animator.SetTrigger("Death");
         yield return new WaitForSeconds(4.0f);
         Destroy(gameObject);
+    }
+
+    void OnAnimAttack()
+    {
+        Debug.Log("Attack");
+
+        var colliders = Physics.OverlapSphere(attackTransform.position, 2);
+        foreach (var collider in colliders)
+        {
+            if (collider.gameObject.CompareTag("Player"))
+            {
+                if (collider.gameObject.TryGetComponent<Health>(out Health health))
+                {
+                    health.OnApplyDamage(damage);
+                    break;
+                }
+            }
+        }
     }
 
     private void Start()
@@ -54,9 +84,29 @@ public class EnemyPlayer : MonoBehaviour
             case State.PATROL:
                 navMeshAgent.isStopped = false;
                 target = GetComponent<WaypointNavagator>().waypoint.transform;
+                if(sensor.sensed != null)
+                {
+                    state = State.CHASE;
+                }
                 break;
             case State.CHASE:
                 navMeshAgent.isStopped = false;
+                if(sensor.sensed != null)
+                {
+                    target = sensor.sensed.transform;
+                    float distance = Vector3.Distance(target.position, transform.position);
+                    Debug.Log(distance);
+                    if(distance <= 2)
+                    {
+                        StartCoroutine(Attack());
+                    }
+                    timer = 2;
+                }
+                timer -= Time.deltaTime;
+                if(timer <= 0)
+                {
+                    state = State.PATROL;
+                }
                 break;
             case State.ATTACK:
                 navMeshAgent.isStopped = true;
